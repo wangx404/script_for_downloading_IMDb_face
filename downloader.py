@@ -76,6 +76,8 @@ def downloadImage(line, scale_ratio):
     temp_image_file = os.path.join(temp_dir, image_file)
     try:
         image_data = requests.get(url, headers=headers)
+        if not image_data.ok: # there are some wrong urls
+            return
         with open(temp_image_file, 'wb') as f:
             f.write(image_data.content)
     except Exception as e:
